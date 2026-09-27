@@ -1,3 +1,5 @@
+-- Skided from release hub
+-- They are opensource btw
 local a = game:GetService("Workspace")
 local b = game:GetService("Players")
 local c = game:GetService("RunService")
