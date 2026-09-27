@@ -28,7 +28,6 @@ local i = {
 	AntiSpamBox = false,
 	AntiPianist = false,
 	AntiSorcusEgg = false,
-	BuffSorcusEgg = false,
 	AntiDuck = false,
 	AntiEpikDuck = false,
 	AntiRocket = false,
@@ -264,7 +263,7 @@ local function aw()
 		at("Piano", 1)
 		at("GrandPiano", 1)
 	end
-	if i.AntiSorcusEgg or i.BuffSorcusEgg then
+	if i.AntiSorcusEgg then
 		at("SorcusEgg", 1)
 	end
 	if i.AntiDuck then
