@@ -1,0 +1,295 @@
+local a = game:GetService("Workspace")
+local b = game:GetService("Players")
+local c = game:GetService("RunService")
+local d = b.LocalPlayer or b.PlayerAdded:Wait()
+local e = d:WaitForChild("PlayerGui")
+local f = a:WaitForChild("Projectile")
+local g = CFrame.new(0, - 99999, 0)
+local h = {}
+local i = {
+	AntiMonolith = false,
+	AntiReinbo = false,
+	AntiChronos = false,
+	AntiStem = false,
+	AntiHyperlaser = false,
+	AntiOutcast = false,
+	AntiSoccer = false,
+	AntiAirhead = false,
+	AntiFlight = false,
+	AntiDualGhostwalker = false,
+	AntiNemesis = false,
+	AntiJolly = false,
+	AntiNewell = false,
+	AntiSkittle = false,
+	AntiArson = false,
+	AntiFraud = false,
+	AntiSpamBox = false,
+	AntiPianist = false,
+	AntiSorcusEgg = false,
+	BuffSorcusEgg = false,
+	AntiDuck = false,
+	AntiEpikDuck = false,
+	AntiRocket = false,
+	AntiDepriver = false,
+	AutoShootTarget = false,
+	AutoShootK1d = false,
+	AutoShootFunK1d = false,
+	AutoShootBush = false,
+	AutoTreellan = false,
+	AntiGameOver = false,
+	AutoShootBigStar = false,
+	AutoShootSuperStar = false,
+	AutoShootShield = false,
+	AutoShootSorcusBlade = false,
+	AutoShootMonitorCenter = false,
+	AutoShootCore = false
+}
+local j = nil
+local k = nil
+local l = nil
+task.spawn(function()
+	local m = e:WaitForChild("CrosshairUI", 10)
+	if m then
+		j = m:WaitForChild("ShootEvent", 5)
+	end
+	local n = e:WaitForChild("ClockQuiz", 10)
+	if n then
+		k = n:WaitForChild("Answer", 5)
+	end
+	local o = e:WaitForChild("FunGui", 10)
+	if o then
+		l = o:WaitForChild("SuccessEvent", 5)
+	end
+end)
+local function p(q)
+	local r = h[q.Name]
+	if not r then
+		return
+	end
+	if r == 1 then
+		q:Destroy()
+	elseif r == 2 then
+		if q:IsA("BasePart") then
+			q.CFrame = g
+		else
+			q:PivotTo(g)
+		end
+	end
+end
+f.ChildAdded:Connect(p)
+c.Heartbeat:Connect(function()
+	if next(h) == nil then
+		return
+	end
+	local s = f:GetChildren()
+	for t = 1, # s do
+		p(s[t])
+	end
+end)
+local u = 0
+local v = 0.08
+local w = os.clock
+c.RenderStepped:Connect(function()
+	if not j then
+		return
+	end
+	local x = a:FindFirstChild("Shootable")
+	if x then
+		if i.AutoShootBigStar then
+			local y = x:FindFirstChild("BigStar")
+			if y then
+				j:FireServer(y)
+			end
+		end
+		if i.AutoShootSuperStar then
+			local z = x:FindFirstChild("SuperStar")
+			if z then
+				j:FireServer(z)
+			end
+		end
+		if i.AutoShootShield then
+			local aa = x:FindFirstChild("Core")
+			if aa then
+				local ab = aa:FindFirstChild("Shield")
+				if ab then
+					j:FireServer(ab)
+				end
+			end
+		end
+		if i.AutoShootSorcusBlade then
+			local ac = x:FindFirstChild("SorcusBlade")
+			if ac then
+				j:FireServer(ac)
+			end
+		end
+		if i.AutoShootMonitorCenter then
+			local ad = x:FindFirstChild("Monitor")
+			if ad then
+				local ae = ad:FindFirstChild("Center")
+				if ae then
+					j:FireServer(ae)
+				end
+			end
+		end
+		if i.AutoShootCore then
+			local af = x:FindFirstChild("Core")
+			if af then
+				j:FireServer(af)
+			end
+		end
+	end
+	local ag = w()
+	if ag - u >= v then
+		u = ag
+		if x then
+			if i.AutoShootTarget then
+				local ah = x:FindFirstChild("Target")
+				if ah then
+					j:FireServer(ah)
+				end
+			end
+			if i.AutoShootK1d then
+				local ai = x:FindFirstChild("TargetK1d")
+				if ai then
+					local aj = ai:FindFirstChild("Target")
+					if aj then
+						j:FireServer(aj)
+					end
+				end
+			end
+			if i.AutoShootFunK1d then
+				local ak = x:FindFirstChild("FunK1d")
+				if ak then
+					local al = ak:FindFirstChild("HumanoidRootPart")
+					if al then
+						j:FireServer(al)
+					end
+				end
+			end
+			if i.AutoShootBush then
+				local am = x:FindFirstChild("Tree")
+				if am then
+					local an = am:FindFirstChild("Bush")
+					if an then
+						j:FireServer(an)
+					end
+				end
+			end
+			if i.AutoTreellan then
+				local ao = x:FindFirstChild("Treellan")
+				if ao then
+					local ap = ao:FindFirstChild("Wood")
+					if ap then
+						j:FireServer(ap)
+					end
+				end
+			end
+		end
+		if i.AntiGameOver and l then
+			l:FireServer(true)
+		end
+	end
+end)
+e.ChildAdded:Connect(function(aq)
+	if i.AntiDepriver and aq.Name == "ChustUI" then
+		local ar = aq:WaitForChild("RemoteEvent", 2)
+		if ar then
+			ar:Destroy()
+		end
+	end
+end)
+local as = {}
+local function at(au, av)
+	h[au] = av
+end
+local function aw()
+	table.clear(h)
+	if i.AntiMonolith then
+		at("Magicball", 1)
+	end
+	if i.AntiReinbo then
+		at("BigStar", 1)
+		at("BigIceball", 1)
+		at("SmallStar", 1)
+		at("FreedomRocket", 1)
+	end
+	if i.AntiChronos then
+		at("CesusBomb", 1)
+		at("Cesuspot", 1)
+	end
+	if i.AntiStem then
+		at("SuperSpam", 1)
+	end
+	if i.AntiHyperlaser then
+		at("Hyperlaser", 1)
+	end
+	if i.AntiOutcast then
+		at("BloodCrystal", 1)
+		at("BloodStone", 1)
+	end
+	if i.AntiSoccer then
+		at("Soccerball", 1)
+	end
+	if i.AntiAirhead then
+		at("LightBomb", 1)
+	end
+	if i.AntiFlight then
+		at("WoodArrow", 1)
+	end
+	if i.AntiNemesis then
+		at("CrossbowArrow", 1)
+	end
+	if i.AntiJolly then
+		at("Arrow", 1)
+	end
+	if i.AntiNewell then
+		at("FireTeapot", 1)
+		at("Teapot", 1)
+	end
+	if i.AntiSkittle then
+		at("RainbowBomb", 1)
+	end
+	if i.AntiArson then
+		at("Molotov", 1)
+	end
+	if i.AntiFraud then
+		at("Ipecac", 1)
+	end
+	if i.AntiSpamBox then
+		at("Spam", 1)
+	end
+	if i.AntiPianist then
+		at("Piano", 1)
+		at("GrandPiano", 1)
+	end
+	if i.AntiSorcusEgg or i.BuffSorcusEgg then
+		at("SorcusEgg", 1)
+	end
+	if i.AntiDuck then
+		at("EvilDuck", 1)
+		at("Duck", 1)
+	end
+	if i.AntiEpikDuck then
+		at("NeonEvilDuck", 1)
+		at("Duck", 1)
+	end
+	if i.AntiDualGhostwalker then
+		at("Ghostwalker", 2)
+		at("BigGhostwalker", 2)
+	end
+	if i.AntiRocket then
+		at("Rocket", 2)
+	end
+end
+function as.SetToggle(ax, ay)
+	if i[ax] ~= nil then
+		i[ax] = ay
+		aw()
+	end
+end
+function as.AnswerClockQuiz()
+	if k then
+		k:FireServer(true)
+	end
+end
+return as
